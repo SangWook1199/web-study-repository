@@ -1,0 +1,51 @@
+@charset "UTF-8";
+body {
+  width: 800px;
+  color: #333; /* 기본 글자색을 진한 회색으로 */
+  padding: 30px; /* 전체 페이지에 20px 여백*/
+}
+h1 {
+  color: #2c3e50;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+}
+h2 {
+  color: #34495e;
+  font-size: 20px;
+  border-left: 4px solid #3498db;
+  padding-left: 10px;
+}
+.intro {
+  font-size: 16px;
+  color: #7f8c8d;
+  font-style: italic;
+}
+.highlight {
+  background-color: #f1c40f;
+  color: #2c3e50;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px; /* 모서리 둥글게 */
+  display: inline-block;
+}
+#main-content {
+    background-color: #ecf0f1;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    padding: 30px;
+    margin: 20px 0; /* 상하 margin 20px 좌우 0px */
+}
+.menu li {
+  list-style: none;
+  padding: 8px 12px;
+  margin: 5px 0;
+  background-color: #95a5a6;
+  border-radius: 4px;
+  color: white;
+}
+.menu .active{
+    background-color: red;
+    font-weight: bold;
+}

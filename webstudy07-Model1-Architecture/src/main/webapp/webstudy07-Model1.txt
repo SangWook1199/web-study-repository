@@ -347,7 +347,19 @@ WAS : Web Application Server ( Web Server(ex-apache) + Web Container(ex-tomcat) 
         .. alert()은 window.alert()중 window가 생략된 것
         window.location, window.onlodad 등..
      												
-     												
+   ** Model 1 Architecture **    												
+   Software Architecture: 소프트웨어 설계양식
+   -> 소프트웨어의 전체 구조를 표현하며 소프트웨어 구성요소(component) 사이의
+      관계를 정의한다
+   
+   초기 웹 개발 방식 (1990년대 후반 ~ 2000년대 초반)
+   jsp <--> Database
+   
+   Model 1 Architecture(2000년대 초반~중반)
+   jsp <--> java beans(Dao,Service 등) <--> Database
+   
+   이후
+   Model 2 Architecture(2000년대 초중반~)
      												
      												
      												

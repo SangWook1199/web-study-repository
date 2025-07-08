@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="org.kosa.member.model.*"%>
+	pageEncoding="UTF-8" import="org.kosa.job.model.*"%>
 <%-- step3-model1-member-find-member-form-process.jsp --%>
 <!DOCTYPE html>
 <html>

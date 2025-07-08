@@ -1,4 +1,4 @@
-package org.kosa.member.model;
+package org.kosa.job.model;
 
 // VO: Value Object, DTO : Data Transfer Object
 public class MemberVo {

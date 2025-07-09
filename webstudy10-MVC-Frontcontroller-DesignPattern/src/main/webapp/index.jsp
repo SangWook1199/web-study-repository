@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h2>WEB MVC 기반 Front Controller Design Pattern 적용</h2>
-	<form method="get" action="FrontControllerServletVer2">
+	<form method="get" action="FrontControllerServletVer3">
 		<%-- 하나의 프론트 컨트롤러 다양한 요청이 이루어지므로 어떤 요청인지를
 	 hidden으로 알린다
  --%>
@@ -26,7 +26,7 @@
 		                          |
 		                          register-result.jsp 로 리다이렉트
 	--%>
-	<form action="FrontControllerServletVer2" method="post">
+	<form action="FrontControllerServletVer3" method="post">
 		<input type="hidden" name="requestType" value="registerCustomer">
 		<input type="text" name="id" placeholder="아이디" required="required"><br>
 		<input type="text" name="name" placeholder="이름" required="required"><br>

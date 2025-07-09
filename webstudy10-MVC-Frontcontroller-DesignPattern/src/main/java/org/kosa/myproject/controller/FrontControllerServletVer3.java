@@ -16,35 +16,12 @@ import jakarta.servlet.http.HttpServletResponse;
  * DispatcherServlet 이 Front Controller 역할을 한다
  * 
  * ver2: 메서드별로 역할을 분리, 단일 책임 원칙
+ * 
+ * ver3: 요청 처리 전담 작업을 별도의 클래스로 전담시킴 단일 책임 원칙을 강화
  */
-@WebServlet("/FrontControllerServletVer2")
-public class FrontControllerServletVer2 extends HttpServlet {
+@WebServlet("/FrontControllerServletVer3")
+public class FrontControllerServletVer3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	protected void findCustomerById(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// 클라이언트 요청 분석: 클라이언트로부터 고객아이디를 받아온다
-		String customerId = request.getParameter("customerId");
-		// MockDao와 연동한다
-		CustomerVo vo = MockDao.getInstance().findCustomerById(customerId);
-		// 고객이 존재하면 고객정보를 request에 공유하여 forward로 응답한다
-		// 고객이 존재하지 않으면 redirect 방식으로 응답한다
-		if (vo != null) {
-			request.setAttribute("customer", vo);
-			request.getRequestDispatcher("findbyid-ok.jsp").forward(request, response);
-		} else {
-			response.sendRedirect("findbyid-fail.jsp");
-		}
-	}
-	protected void registerCustomer(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		CustomerVo vo = new CustomerVo(request.getParameter("id"), request.getParameter("name"),
-				request.getParameter("address"));
-		if (vo != null) {
-			MockDao.getInstance().registerCustomer(vo);
-			response.sendRedirect("register-result.jsp");
-		}
-	}
 
 	protected void doDispatch(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -52,9 +29,13 @@ public class FrontControllerServletVer2 extends HttpServlet {
 			String requestType = request.getParameter("requestType");
 //			System.out.println(requestType);
 			if (requestType != null && requestType.equals("findbyid")) {
-				this.findCustomerById(request, response);
+				FindCustomerByIdController controller = new FindCustomerByIdController();
+				String path = controller.findCustomerById(request, response);
+				request.getRequestDispatcher(path).forward(request, response);
 			} else if (requestType != null && requestType.equals("registerCustomer")) {
-				this.registerCustomer(request, response);
+				RegisterCustomerController controller = new RegisterCustomerController();
+				String path = controller.registerCustomer(request, response);
+				response.sendRedirect(path);
 			}
 		} catch (Exception e) { // 예외 처리 로직을 Front 에게 일관성 있게 정의, 이후 유지보수성도 향상
 			e.printStackTrace();

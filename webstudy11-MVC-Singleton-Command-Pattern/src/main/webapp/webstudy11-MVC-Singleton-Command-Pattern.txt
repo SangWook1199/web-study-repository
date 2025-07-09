@@ -459,7 +459,6 @@ JSP 페이지에서 JSTL 사용 선언부
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 중요 포인트: 톰캣 10.1은 Jakarta EE 10을 기반으로 하므로 jakarta.tags.core 네임스페이스를 사용해야 함 
    
-   ****************************************************************************************
    - Front Controller Design Pattern
      :모든 클라이언트의 요청을 하나의 진입점으로 통합하여 처리하는 설계 패턴
      
@@ -495,7 +494,6 @@ JSP 페이지에서 JSTL 사용 선언부
      Spring 과 연관성: Spring MVC 의 DispatcherServlet 이 Front Controller Pattern이
                      적용된 Front Controller 역할을 함
      
-     *******************************************************************************
      FrontController Ver1: 기본 Front Controller -> 모든 클라이언트의 요청을 하나의 진입점으로 모았음
      // 모든 로직이 doDispatch에 집중
      doDispatch(request,response){
@@ -539,88 +537,66 @@ JSP 페이지에서 JSTL 사용 선언부
    	 	}
    	 }
 
+*********************************************************************************************************************
+Command Design Pattern:	요청 처리를 전담하는 객체를 캡슐화하는 패턴
+                       	각 기능 별로 독립적인 처리 객체를 만들어 관리
+                       	
+실생활 비유: 식당 주문 시스템
+       	   고객주문(request) - 주문서를 처리하는 객체(Command 객체: 우리는 Controller라고 부름/)                       	
+       	   주문서별로 전담 요리사 배정
+       	   짬뽕 주문 -> 중화요리 요리사
+       	   파스타 주문 -> 이탈리아 요리사
 
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-     												
-     												
-     												
-     												
-     												
-     												
-     												
-     												
-     												 	  
-     		  
+Command Pattern 을 적용하지 않으면
+FrontController 가 모든 기능을 구현
+-> 문제점: 코드 비대화, 단일 책임 원칙 위반, 새기능 추가시 공통 클래스를 수정, 테스트 어려움, 가독성 저하
+
+Command Pattern 도입하면
+각 기능별(요청처리)로 독립적인 Command(Controller) 객체를 생성
+캡슐화 -> 소통부와 구현부를 분리, FrontController는 소통부와 연동, 내부 구현부는 독립적으로 존재
+		 계층구조를 형성(interface 와 abstract)
+
+장점: 단일 책임 원칙 준수 -> 각 command(Controller)는 하나의 기능만 담당
+     확장성 향상 -> 비즈니스가 추가되면 해당 Command(Controller)만 추가하면 됨(이전에는 기존 코드를 수정해야 했음)
+     테스트 용이성 -> 각 command(Controller) 별로 독립 테스트
+     코드 재사용성 증대
+     유지보수성 향상
      
-     
-     
-     													
-     													
-     													
-     													
-     													
-     													
-     													
-     													  						
-     						
-     						
-     						
-     						
-     						
-     						
-     						
-     													       	
- 	
- 
- 
- 
- 
- 
- 
- 
- 
- 
+Spring 과의 연관성
+String 의 @Controller -> Command(or Controller)
+@RequestMapping 메서드가 하나의 Command(Controller) 역할
+
+*********************************************************************************************************************   
+Ver4: MCV + Singleton + Front Controller + Command
+interface 부분
+<<interface>>
+Controller      --- 요청처리, 전담 객체 캡슐화
++ handleRequest(request,response)
+  ^
+  :
+  :
+implementaion 부분
+FindCustomerByIdController
++handleRequest 오버라이드
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
  
  

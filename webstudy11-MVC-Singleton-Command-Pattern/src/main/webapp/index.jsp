@@ -20,9 +20,10 @@
 	<br>
 	<%-- 
 		다양한 요청을 Front 즉 하나의 진입점에서 처리하도록 한다 
-		index -- 고객등록요청 -- FrontControllerServlet
-		                          doDispatch() ---------------------MockDao
-		                          |
+		index -- 고객등록요청 -- FrontControllerServlet     Controller
+		                          doDispatch()                | ----------MockDao
+		                          |	                          |
+		                          |                      RegisterCustomerController
 		                          |
 		                          register-result.jsp 로 리다이렉트
 	--%>
@@ -30,8 +31,7 @@
 		<input type="hidden" name="command" value="registerCustomer">
 		<input type="text" name="id" placeholder="아이디" required="required"><br>
 		<input type="text" name="name" placeholder="이름" required="required"><br>
-		<input type="text" name="address" placeholder="주소" required="required"><br>
-		<br>
+		<input type="text" name="address" placeholder="주소" required="required"><br><br>
 		<button type="submit">고객등록</button>
 	</form>
 	<br>
